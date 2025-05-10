@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { register, login, getMe } from '../controllers/auth.controller';
 import verifyToken from '../middlewares/verifyToken';
+import { loginRateLimiter } from '../middlewares/rateLimiter';
 
 const router = Router();
 
@@ -8,7 +9,7 @@ const router = Router();
 router.post('/register', register);
 
 // Route to login a user
-router.post('/login', login);
+router.post('/login', loginRateLimiter, login);
 
 // Route to get the authenticated user's information
 router.get('/me', verifyToken, getMe);

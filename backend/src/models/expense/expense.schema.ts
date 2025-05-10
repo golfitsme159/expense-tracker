@@ -16,3 +16,5 @@ export const createExpenseSchema = z.object({
         message: "Invalid date format"
     })
 });
+
+export const updateExpenseSchema = createExpenseSchema.partial();

@@ -1,18 +1,22 @@
-import { z } from 'zod';
+export interface CreateExpenseDto {
+    title: string;
+    amount: number;
+    category?: string;
+    date: string; // ISO string
+}
 
-// This schema is used to validate the structure of a new expense before creating it
-export const createExpenseSchema = z.object({
-    // Title must be a non-empty string
-    title: z.string().min(1),
+export interface Expense {
+    id: number;
+    title: string;
+    amount: number;
+    category?: string;
+    date: string;
+    userId: number;
+}
 
-    // Amount must be a positive number
-    amount: z.number().positive(),
-
-    // Category is optional and should be a string if provided
-    category: z.string().optional(),
-
-    // Date must be a valid ISO date string
-    date: z.string().refine((val: string) => !isNaN(Date.parse(val)), {
-        message: "Invalid date format"
-    })
-});
+export interface UpdateExpenseDto {
+    title?: string;
+    amount?: number;
+    category?: string;
+    date?: string;
+}

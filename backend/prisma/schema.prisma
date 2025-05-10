@@ -19,6 +19,7 @@ model User {
   password  String
   createdAt DateTime @default(now())
   expenses  Expense[]
+  activitylog  ActivityLog[]
 }
 
 model Expense {
@@ -29,4 +30,16 @@ model Expense {
   date     DateTime
   userId   Int
   user     User     @relation(fields: [userId], references: [id])
+}
+
+model ActivityLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  action    String   // CREATE, UPDATE, DELETE
+  entity    String   // Expense, User, etc.
+  targetId  Int?
+  detail    String?
+  timestamp DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
 }
