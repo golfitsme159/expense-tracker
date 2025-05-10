@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
+import expenseRoutes from './routes/expense.routes'
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Routes related to authentication
 app.use('/auth', authRoutes);
+app.use('/expenses', expenseRoutes);
 
 // Define the port to listen on
 const PORT = process.env.PORT || 5001;
